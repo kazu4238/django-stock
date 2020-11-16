@@ -1,4 +1,5 @@
 from django import forms
+from .models import Stock
 
 import requests
 import json
@@ -20,6 +21,15 @@ class SymbolNameListForm(forms.Form):
     # 小文字化してから並べ替える(デフォルトでは大文字優先のため)
     symbol_name_tuple = sorted(symbol_name_tuple,key=lambda t:t[1].lower())
     target_stock = forms.ChoiceField(label="選択してください",choices=symbol_name_tuple,required=False)
+
+
+# 選択した銘柄のシンボルを保存するためのフォームクラス作成
+class StockForm(forms.ModelForm):
+        class Meta:
+            model = Stock
+         # request.POSTでnameがtarget_stockの値を取得する
+            fields = ["target_stock"]
+
 
 
 
