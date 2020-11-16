@@ -1,5 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{ api }}
+
+<form action="{%url 'home' %}" class="form-inline my-2 my-lg-0" method="post">
+    {% csrf_token %}
+     <input class="form-control mr-sm-2" type="search" placeholder="入力してください" aria-label="Search" name="target_stock">
+     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">表示する</button>
+</form>
+<br/>
+<br/>
+<br/>
+<h2> {{ api.companyName }}</h2><br />
+
+<table class="table table-bordered table-responsive">
+
+<tbody>
+    <tr>
+        <th scope="row">価格</th>
+        <td>${{ api.latestPrice }}</td>
+    </tr>
+       <tr>
+     <th scope="row">前日終値</th>
+     <td>${{ api.previousClose }}</td>
+   </tr>
+   <tr>
+     <th scope="row">時価総額</th>
+     <td>${{ api.marketCap }}</td>
+       <tr>
+     <th scope="row">前年高値</th>
+     <td>${{ api.week52High }}</td>
+        <tr>
+     <th scope="row">前年底値</th>
+     <td>${{ api.week52Low }}</td>
+   </tr>
+ </tbody>
+</table>
+
 {% endblock %}
+
