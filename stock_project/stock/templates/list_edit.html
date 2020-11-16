@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 <br>
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissable" role="alert">
+  <button class="close" data-dismiss="alert">
+    <small><sup>x</sup></small>
+    </button>
+    {{ message }}
+  </div><br/>
+{% endfor %}
+{% endif %}
+
 <form action="{% url 'list_edit' %}" method="post">
     {% csrf_token %}
     {{ SymbolNameListForm }}
@@ -22,7 +34,7 @@
 		</tr>
      	{% for list_item in stock_list %}
      	 <tr>
-<!--             ループのカウンター記号を表す　今回は０から始まり、１、２となる-->
+<!--   ループのカウンター記号を表す　今回は０から始まり、１、２となる-->
 			<td scope="row">{{ forloop.counter0|add:1 }}</td>
 			<td>{{ list_item.companyName }}</td>
 			<td>${{ list_item.latestPrice }}</td>

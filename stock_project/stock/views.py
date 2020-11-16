@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Stock
 from .forms import StockForm
+from django.contrib import messages
 
 Mytoken = "pk_be483a022b2f4e7699de538fc0131481"
 
@@ -52,7 +53,8 @@ def add_stock(request):
         if form.is_valid():
             # 新レコードが保存される
             form.save()
-
+            # ユーザのアクションが成功した時にメッセージを通知する
+            messages.success(request,("追加されました"))
         return redirect('list_edit')
     
     else:
@@ -82,6 +84,8 @@ def delete(request,stock_id):
     item = Stock.objects.get(pk=stock_id)
     # 削除する
     item.delete()
+    # ユーザのアクションが成功した時にメッセージを通知する
+    messages.success(request, ("削除されました"))
     return redirect('list_edit')
 
 
