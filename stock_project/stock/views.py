@@ -77,6 +77,12 @@ def add_stock(request):
 
         return render(request,'list_edit.html',{'stock_saved':stock_saved,'stock_list':stock_list,'api':api,'SymbolNameListForm':SymbolNameListForm})
 
+def delete(request,stock_id):
+    # モデルから対象idの内容を取得
+    item = Stock.objects.get(pk=stock_id)
+    # 削除する
+    item.delete()
+    return redirect('list_edit')
 
 
 

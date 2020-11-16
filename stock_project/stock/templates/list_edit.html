@@ -18,6 +18,7 @@
 			<th>時価総額</th>
 			<th>前年高値</th>
 			<th>前年底値</th>
+			 <th>登録削除</th>
 		</tr>
      	{% for list_item in stock_list %}
      	 <tr>
@@ -29,6 +30,7 @@
 			<td>${{ list_item.marketCap }}</td>
 			<td>${{ list_item.week52High }}</td>
 			<td>${{ list_item.week52Low }}</td>
+			<td><a href="{% url 'delete' list_item.id %}">削除する</a></td>
 		</tr>
 		{% endfor %}
 	</tr>
