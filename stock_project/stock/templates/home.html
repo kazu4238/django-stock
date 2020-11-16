@@ -2,11 +2,12 @@
 
 {% block content %}
 
-<form action="{%url 'home' %}" class="form-inline my-2 my-lg-0" method="post">
-    {% csrf_token %}
-     <input class="form-control mr-sm-2" type="search" placeholder="入力してください" aria-label="Search" name="target_stock">
+<form action="{% url 'home' %}"  class="form-inline my-2 my-lg-0" method="POST">
+   	{% csrf_token %}
+   	{{ SymbolNameListForm }}
      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">表示する</button>
 </form>
+
 <br/>
 <br/>
 <br/>

@@ -8,8 +8,12 @@ Mytoken = "pk_be483a022b2f4e7699de538fc0131481"
 # 第三引数に、辞書型を指定することで、テンプレートで{{}}という形で
 # 値を埋め込めるようにできます。(今回は空)
 def home(request):
+    from .forms import SymbolNameListForm
     import requests
     import json
+
+    # formをインスタンス化
+    SymbolNameListForm = SymbolNameListForm()
 
     if request.method == 'POST':
         # target_symbolに選択した銘柄記号が入ることでその銘柄記号のAPIが取得できるようにする
@@ -23,6 +27,7 @@ def home(request):
         except Exception as e:
             api = "エラー"
 
-        return render(request,'home.html',{'api':api})
+        # form自体をhtmlに橋渡しできるようにする
+        return render(request,'home.html',{'api':api,'SymbolNameListForm':SymbolNameListForm})
     else:
-        return render(request,'home.html')
+        return render(request,'home.html',{'SymbolNameListForm':SymbolNameListForm})
