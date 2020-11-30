@@ -107,7 +107,8 @@ def pandas_dr(request):
     return redirect(request,'list_edit.html')
 
 
-#グラフ作成
+
+#グラフ作成 ローソク足で表示させるための一連の関数
 def setPlt():
     import matplotlib
     # バックエンドを指定
@@ -120,6 +121,7 @@ def setPlt():
     df = pdr.get_data_yahoo('AAPL', '2020-08-16', '2020-11-17')
     ax = plt.subplot()
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
+    # ここでローソク足作成？
     candlestick_ohlc(ax, zip(mdates.date2num(df.index), df['Open'], df['High'], df['Low'], df['Close']), width=0.4)
     plt.title('apple')
     plt.savefig('stock.png')
@@ -139,5 +141,7 @@ def get_svg(request):
     plt.cla()  # グラフをリセット
     response = HttpResponse(svg, content_type='image/svg+xml')
     return response
+
+
 
 
